@@ -113,7 +113,7 @@ func main() {
 
 	for _, f := range fl {
 		dir := filepath.Dir(f.To)
-		if dir != *outputDir {
+		if _, fErr := os.Stat(dir); os.IsNotExist(fErr) {
 			fmt.Printf("mkdir %s (0777)\n", filepath.Dir(f.To))
 			if !*dryRun {
 				err = os.MkdirAll(filepath.Dir(f.To), 0777)

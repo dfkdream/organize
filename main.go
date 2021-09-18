@@ -46,6 +46,9 @@ func buildFileList(root, pattern string, recursive bool, outputDir string, outpu
 			buff := new(strings.Builder)
 			tErr := outputTemplate.Execute(buff, f)
 			if tErr != nil {
+				if strings.HasSuffix(tErr.Error(), "skip this directory") {
+					return filepath.SkipDir
+				}
 				return tErr
 			}
 
@@ -100,6 +103,9 @@ func main() {
 				return "", os.Chtimes(filename, t, t)
 			},
 			"parseTime": time.Parse,
+			"skip": func() (string, error) {
+				return "", filepath.SkipDir
+			},
 		}).
 		Parse(*outputTemplateString)
 	if err != nil {

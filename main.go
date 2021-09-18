@@ -67,7 +67,7 @@ func buildFileList(root, pattern string, recursive bool, outputDir string, outpu
 
 func main() {
 	inputDir := flag.String("i", ".", "Input Directory")
-	outputDir := flag.String("o", "./output", "Output Directory")
+	outputDir := flag.String("o", ".", "Output Directory")
 	pattern := flag.String("p", "*", "File name pattern (Default: *)")
 	recursive := flag.Bool("r", false, "Enable recursive walk")
 	dryRun := flag.Bool("dry-run", false, "Enable dry run")
